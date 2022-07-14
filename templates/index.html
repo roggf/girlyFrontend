@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <title>Machine Learning - Dobble</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/fontawesome.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/templatemo-seo-dream.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/animated.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles/owl.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dobble.css')}}">
+
+
+    <!--    TemplateMo 563 SEO Dream
+
+        https://templatemo.com/tm-563-seo-dream
+    -->
+
+
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+<script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type=text/javascript> $(function () {
+    $("#mybutton").click(function (event) {
+        $.getJSON('/start_stop_game', {},
+            function (data) {
+            });
+        return false;
+    });
+}); </script>
+<script type=text/javascript> $(function () {
+    $("#reset").click(function (event) {
+        $.getJSON('/reset', {},
+            function (data) {
+            });
+        return false;
+    });
+}); </script>
+<script type=text/javascript> $(function () {
+    $("#ready").click(function (event) {
+        $.getJSON('/ready', {},
+            function (data) {
+            });
+        return false;
+    });
+}); </script>
+<script type=text/javascript> $(function () {
+    $("#easy").click(function (event) {
+        $.getJSON('/easy', {},
+            function (data) {
+            });
+        return false;
+    });
+}); </script>
+<script type=text/javascript> $(function () {
+    $("#hard").click(function (event) {
+        $.getJSON('/hard', {},
+            function (data) {
+            });
+        return false;
+    });
+}); </script>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <h4> Forschungsprojekt Dobble </h4>
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="#top" class="active">Spielen</a></li>
+                        <li class="scroll-to-section"><a href="#features">Spielregeln</a></li>
+                        <li class="scroll-to-section"><a href="#about">Über Uns</a></li>
+                        <li class="scroll-to-section"><a href="#contact">Kontakt</a></li>
+
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<--
+<div class="main-banner wow fadeIn" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6 align-self-center">
+                        <img src="{{ url_for('video_feed') }}" width="100%">
+                        <br>
+            <!--            <input type="button" id="difficulty" class="butdesigndo" value="Schwierigkeitsstufe ändern"/> -->
+            <!--            <input type="button" id="gotit" class="butdesigndo" value="Ich habs!"/> -->
+                                                            <h4 id="posuserdo"> Dein Punktestand </h4>
+
+                        <h4 id="punktu"> 0 </h4>
+                        <h4 id="poskido"> Punktestand der KI </h4>
+                        <h4 id="punktki"> 0 </h4>
+                        <br>
+                        <img id="symbol" src=""  style="width: 2vw; min-width: 5px;">
+
+                        <div class="left-content header-text wow fadeInLeft" data-wow-duration="1s" data-wow-delay="1s">
+                            <div class="row">
+                                <div class="col-lg-4 col-sm-4">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-4">
+                                <div class="info-stat">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-4">
+                                <div class="info-stat">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                            </div>
+                            <div class="col-lg-12">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                        <h4 id="test"></h4>
+   <!--             <input type="button" id="mybutton" class="butdesigndo" value="Start/Stop"/> -->
+                <input type="button" id="easy" class="butdesigndo" value="Stufe Einfach"/>
+                <input type="button" id="hard" class="butdesigndo" value="Stufe Schwer"/>
+
+
+                <input type="button" id="ready" class="butdesigndo" value="Nächste Runde"/>
+                <input type="button" id="reset" class="butdesigndo" value="Reset"/>
+
+
+                <form method="post" action="/">
+                    <div>
+                        <script>
+                            socket = io();
+                            socket.connect('http://127.0.0.1:5500/')
+                            socket.on('connect', function () {
+                                console.log('connected')
+                            })
+                            socket.on('message1', function (msg) {
+                                if (msg != null) {
+
+                                    document.getElementById("punktu").innerHTML = msg.toString()
+                                    console.log(msg)
+                                } else {
+                                    document.getElementById("test").innerHTML = 'Kein Symbol gefunden'
+                                }
+                            })
+                        </script>
+
+
+                        <script>
+                            socket = io();
+                            socket.connect('http://127.0.0.1:5500/')
+                            socket.on('connect', function () {
+                                console.log('connected')
+                            })
+                            socket.on('message', function (msg) {
+                                if (msg != null && (typeof msg) == "string") {
+                                    if (msg.substring(0, 2) == ".."){
+                                        console.log(msg)
+                                        document.getElementById("symbol").src=msg.toString()
+                                    }
+                                    else {
+                                        document.getElementById("test").innerHTML = msg.toString()
+                                        console.log(msg)
+                                    }
+                                }
+                                else if (msg != null && (Array.isArray(msg)) === true){
+                                    document.getElementById("punktu").innerHTML = msg[0].toString()
+                                    document.getElementById("punktki").innerHTML = msg[1].toString()
+                                }
+                            })
+                        </script>
+                        <h4 id="posdubvdo"></h4>
+                    </div>
+                </form>
+                <h1>{{ symbol }}</h1>
+            </div>
+            <div class="col-lg-6">
+                <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="features" class="features section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="features-content">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="features-item first-feature wow fadeInUp" data-wow-duration="1s"
+                                 data-wow-delay="0s">
+                                <div class="first-number number">
+                                    <h6>01</h6>
+                                </div>
+                                <h4>Grundlagen</h4>
+                                <div class="line-dec"></div>
+                                <p>Das Spiel besteht aus 55 Karten mit jeweils 8 verschiedenen Symbolen pro Karte. Das
+                                    Ziel des Spiels
+                                    ist es immer auf zwei Karten das übereinstimmende Symbol zu finden. Dazu wurden die
+                                    Karten von den
+                                    Spieleentwicklern zu präpariert, dass immer genau ein Symbol auf zwei Karten
+                                    übereinstimmt.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="features-item second-feature wow fadeInUp" data-wow-duration="1s"
+                                 data-wow-delay="0.2s">
+                                <div class="second-number number">
+                                    <h6>02</h6>
+                                </div>
+                                <h4>Vorbereitung</h4>
+                                <div class="line-dec"></div>
+                                <p>Die Karten werden vor dem Spiel gründlich gemischt und der Stapel dann verdeckt auf
+                                    den Tisch
+                                    gelegt. Dann muss der Spieler eine Karte für sich und die KI ziehen und diese
+                                    aufgedeckt vor sich
+                                    (seine eigene Karte) und aufgedeckt in die markierte Zone (die Karte der KI)
+                                    legen. </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="features-item first-feature wow fadeInUp" data-wow-duration="1s"
+                                 data-wow-delay="0.4s">
+                                <div class="third-number number">
+                                    <h6>03</h6>
+                                </div>
+                                <h4>Spielablauf</h4>
+                                <div class="line-dec"></div>
+                                <p>Wenn der Spieler bereit ist, wird eine dritte Karte aufgedeckt und in die markierte
+                                    Zone gelegt.
+                                    Wer als Erstes das Duplikat erkennt, gewinnt die Karte in der Mitte und behält diese
+                                    und seine
+                                    ursprüngliche Karte. Danach zieht er eine neue Karte. Der Verlierer behält seine
+                                    Karte.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="features-item second-feature last-features-item wow fadeInUp"
+                                 data-wow-duration="1s" data-wow-delay="0.6s">
+                                <div class="fourth-number number">
+                                    <h6>04</h6>
+                                </div>
+                                <h4>Ende des Spiels</h4>
+                                <div class="line-dec"></div>
+                                <p>Wenn alle Karten in der Mitte aufgedeckt wurden, gewinnt der Spieler mit den meisten
+                                    Paaren in
+                                    seinem Besitz. Viel Spaß!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+<div id="about" class="about-us section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="left-image wow fadeInLeft" data-wow-duration="1s" data-wow-delay="0.5s">
+                </div>
+            </div>
+            <div class="col-lg-6 align-self-center wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                <div class="section-heading">
+                    <h6>Über Uns</h6>
+                    <h2>Unser <em>Forschungsprojekt</em> im Masterstudiengang "Mobile Systeme" zum Thema: Machine
+                        Learning <span>mit Dobble</span></h2>
+                </div>
+
+                <p>Heutige ML-Modelle stehen bereits für vielfältige, praktische Aufgaben zur Verfügung und sind t.w.
+                    auch für
+                    Edge-Plattformen in IoT-Konfigurationen einsetzbar. Im
+                    Rahmen des Ambient Assisted Living soll
+                    untersucht werden, ob bzw. inwieweit sie
+                    auch für Assistive Anwendungen geeignet
+                    sind.
+                    Als Use Case soll das bekannte Kartenspiel „Dobble“ dienen. Es besteht aus ca. 55 Karten mit je 8
+                    einfachen
+                    Symbolen. Diese
+                    sind aus einer Menge von 57 Symbolen derart ausgewählt, daß auf je zwei beliebigen Karten genau ein
+                    Symbol
+                    übereinstimmt.
+                    Verschiede CNNs (z.B. ResNet, YoloV5) sollen dabei auf ihre Tauglichkeit und Perfor-
+                    mance bzgl. Image Labeling und Object Detection untersucht werden. Dazu werden geeig-
+                    nete CNNs zunächst trainiert, und danach wird damit eine ML-basierte Anwendung des
+                    von „Dobble“ implementiert.
+                    Ziel des Projektes:
+                    Ist eine kamerabasierte Anwendung, welche das gemeinsame Symbol auf je zwei Karten
+                    erkennt und in geeigneter Weise (z.B. als Sprachausgabe) signalisiert. Idealerweise erfolgt
+                    dies in weniger als 1s.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p>Copyright © 2022 Doran Scholl, Robby Courbis Tatchou Djakou, Sinan Harkci & Felix Rogg.
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="../static/vendor/jquery/jquery.min.js"></script>
+<script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../static/assets/js/owl-carousel.js"></script>
+<script src="../static/assets/js/animation.js"></script>
+<script src="../static/assets/js/imagesloaded.js"></script>
+<script src="../static/assets/js/custom.js"></script>
+
+</body>
+</html>
